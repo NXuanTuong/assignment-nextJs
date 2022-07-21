@@ -13,9 +13,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className="text-indigo-500 font-bold text-5xl text-center">
-          Xin chào mọi người !
-        </h1>
+        
       </main>
 
       <footer className={styles.footer}>
