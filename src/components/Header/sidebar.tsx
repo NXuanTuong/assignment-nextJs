@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unknown-property */
+import Link from "next/link";
 import React from "react";
 
 type Props = {};
@@ -11,7 +12,7 @@ const SideBar = (props: Props) => {
           <span className="block font-bold h-10 rounded-lg text-center text-xl">SKYBOOK</span>
 
           <nav className="flex flex-col mt-6 space-y-1">
-            <a
+            <Link
               href="/admin"
               className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg"
             >
@@ -31,9 +32,9 @@ const SideBar = (props: Props) => {
               </svg>
 
               <span className="ml-3 text-sm font-medium"> DashBoard </span>
-            </a>
+            </Link>
 
-            <a
+            <Link
               href="/admin/products"
               className="flex items-center px-4 py-2 text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700"
             >
@@ -48,7 +49,7 @@ const SideBar = (props: Props) => {
               </svg>
 
               <span className="ml-3 text-sm font-medium"> Products </span>
-            </a>
+            </Link>
 
             <a
               href=""
