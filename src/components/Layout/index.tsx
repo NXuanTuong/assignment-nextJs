@@ -1,15 +1,16 @@
-import React from "react";
+import { LayoutProps } from "@/models/layout";
+import React, { Children } from "react";
+import Footer from "../Footer";
 import Header from "../Header";
 
 type Props = {};
 
-const Layout = (props: Props) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
       <Header />
-      <h1 className="text-indigo-500 font-bold text-5xl text-center">
-        Xin chào mọi người !
-      </h1>
+      <main>{children}</main>
+      <Footer />
     </div>
   );
 };
