@@ -1,0 +1,117 @@
+.mainHeader {
+    width: 100%;
+    background: #fff;
+}
+.containerfluid {
+    max-width: 1500px;
+    padding: 40px 30px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.flexcontainerfluid {
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.mainHeader .flex-container-header > div[class*='header-wrap-'] {
+    padding: 0 15px;
+}
+.mainHeader .headerwraplogo h1, .mainHeader .headerwraplogo a {
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin: 0;
+    white-space: initial;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #333333;
+}
+.headerwraplogo h1 {
+    line-height: 1.2;
+}
+.navbarmainmenu {
+    text-align: center;
+}
+.mainHeader .headerwrapmenu ul.menuListprimary {
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+.headerwrapmenu ul {
+    padding: 0;
+    list-style-type: none;
+}
+.mainHeader .headerwrapmenu ul.menuListprimary > li {
+    display: inline-block;
+    margin: 0 30px;
+    position: relative;
+}
+.mainHeader .headerwrapmenu ul.menuListprimary > li > a {
+    position: relative;
+    z-index: 2;
+    display: block;
+    color: #333333;
+    text-decoration: none;
+    width: 100%;
+    letter-spacing: 0.75px;
+    font-weight: 500;
+    font-size: 15px;
+    transition: none;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.cssform {
+    display: flex;
+    align-items: center;
+}
+.cssform li {
+    display: inline-block;
+    margin: 0 15px;
+    position: relative;
+}
+.cssform li > a {
+    position: relative;
+    z-index: 2;
+    display: block;
+    color: #333333;
+    text-decoration: none;
+    width: 100%;
+    letter-spacing: 0.75px;
+    font-weight: 500;
+    font-size: 15px;
+    transition: none;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.headerwrapaction {
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.cart {
+    position: relative;
+}
+
+.cart span {
+    position: absolute;
+    top: -12px;
+    right: -9px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px 3px;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+    background: #f1c150;
+    text-align: center;
+}
