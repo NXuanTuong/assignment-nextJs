@@ -33,27 +33,27 @@ const Header = (props: Props) => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="product" title="Sản phẩm">
+                    <Link href="/products" title="Sản phẩm">
                       Sản phẩm
                     </Link>
                   </li>
                   <li>
-                    <a href="/blogs/news" title="Blog">
+                    <Link href="/blogs/news" title="Blog">
                       Blog
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/pages/about-us" title="Giới thiệu">
+                    <Link href="/pages/about-us" title="Giới thiệu">
                       Giới thiệu
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       href="https://skybook.myharavan.com/pages/lien-he"
                       title="Liên hệ"
                     >
                       Liên hệ
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -64,11 +64,11 @@ const Header = (props: Props) => {
                   <FaUserAlt />
                   <ul>
                     <li>
-                      <Link href="auth/login">Đăng nhập</Link>
+                      <Link href="/auth/login">Đăng nhập</Link>
                     </li>
                     |
                     <li>
-                      <Link href="auth/register">Đăng ký</Link>
+                      <Link href="/auth/register">Đăng ký</Link>
                     </li>
                   </ul>
                 </div>
