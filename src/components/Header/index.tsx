@@ -18,7 +18,7 @@ const Header = (props: Props) => {
                 itemType="http://schema.org/Organization"
               >
                 <h1>
-                  <a href="https://skybook.myharavan.com" itemProp="url">
+                  <a itemProp="url">
                     SkyBook
                   </a>
                 </h1>
