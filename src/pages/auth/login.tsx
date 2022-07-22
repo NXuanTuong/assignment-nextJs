@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 type Props = {};
@@ -9,7 +10,6 @@ const LoginPage = (props: Props) => {
         <main className="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
           <section>
             <h3 className="font-bold text-2xl">Welcome to SKYBOOK</h3>
-            <p className="text-gray-600 pt-2">Sign in to your account.</p>
           </section>
           <section className="mt-10">
             <form className="flex flex-col" method="POST" action="#">
@@ -41,40 +41,35 @@ const LoginPage = (props: Props) => {
               </div>
               <div className="flex justify-between mb-3">
                 <div className=" ">
-                  <a
-                    href="#"
-                    className="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-6"
+                  <Link
+                    href="/auth/register"
+                    
                   >
-                    Signup
-                  </a>
+                    <p className="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-6">
+                    Đăng Ký
+                    </p>
+                  </Link>
                 </div>
                 <div className=" ">
-                  <a
+                  <Link
                     href="#"
-                    className="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-6"
+                    
                   >
-                    Forgot your password?
-                  </a>
+                    <p className="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-6">
+                    Bạn quên mật khẩu ?
+                    </p>
+                  </Link>
                 </div>
               </div>
               <button
                 className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200"
                 type="submit"
               >
-                Sign In
+                Đăng Nhập
               </button>
             </form>
           </section>
         </main>
-        <div className="max-w-lg mx-auto text-center mt-12 mb-6">
-          <p className="text-white">
-            have an account?
-            <a href="#" className="font-bold hover:underline">
-              Sign up
-            </a>
-            .
-          </p>
-        </div>
       </div>
     </div>
   );
