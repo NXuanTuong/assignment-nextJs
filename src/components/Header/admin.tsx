@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unknown-property */
+import Link from "next/link";
 import React from "react";
 
 type Props = {};
@@ -52,18 +53,18 @@ const AdminHeader = (props: Props) => {
         </div>
 
         <nav className="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
-          <a className="text-gray-900" href="">
-            DashBoard
-          </a>
-          <a className="text-gray-900" href="">
-            Products
-          </a>
-          <a className="text-gray-900" href="">
-            Category
-          </a>
-          <a className="text-gray-900" href="">
-            Account
-          </a>
+          <p className="text-gray-900" >
+            <Link href={""}>DashBoard</Link>
+          </p>
+          <p className="text-gray-900" >
+            <Link href={""}>Products</Link>
+          </p>
+          <p className="text-gray-900" >
+            <Link href={""}>Category</Link>
+          </p>
+          <p className="text-gray-900" >
+            <Link href={""}>Account</Link>
+          </p>
         </nav>
 
         
