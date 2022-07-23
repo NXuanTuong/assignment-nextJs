@@ -16,7 +16,7 @@ const AdminLayout = ({children}: LayoutProps) => {
             <div>
                 <AdminHeader/>
             </div>
-            {children}
+            <main>{children}</main>
         </div>
     </div>
   )
