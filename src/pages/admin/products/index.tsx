@@ -4,11 +4,12 @@ import AdminLayout from "@/components/Layout/admin";
 import useProducts from "@/hooks/use-products";
 import Link from "next/link";
 import React from "react";
+import { toast } from "react-toastify";
 
 type Props = {};
 
 const ProductAdmin = (props: Props) => {
-  const { data, error } = useProducts();
+  const { data, error, removeProduct } = useProducts();
   if (!data) return <div>Loading...</div>;
   if (error) return <div>Falied</div>;
   return (
@@ -142,6 +143,11 @@ const ProductAdmin = (props: Props) => {
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
+                              onClick={() =>
+                                removeProduct(item._id).then(() =>
+                                  toast.success("Xóa sản phẩm thành công")
+                                )
+                              }
                             >
                               <path
                                 strokeLinecap="round"
