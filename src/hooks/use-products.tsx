@@ -1,4 +1,4 @@
-import { add, remove } from "@/api/product";
+import { add, read, remove, update } from "@/api/product";
 import React from "react";
 import useSWR from "swr";
 
@@ -16,11 +16,23 @@ const useProducts = () => {
     console.log(newList);
     mutate(newList);
   };
+
+  const updateProduct = async (product: any) => {
+    await update(product);
+    mutate(data.map((item: any) => (item.id === data.id ? product : item)));
+  };
+   
+  const readProduct = async (id: any) => {
+    const getProduct = await read(id)
+    return getProduct
+  }
   return {
     data,
     error,
     addProduct,
     removeProduct,
+    updateProduct,
+    readProduct
   };
 };
 
