@@ -88,7 +88,7 @@ const ProductAdmin = (props: Props) => {
                       <td className="py-3 px-6 text-left">
                         <div className="flex items-center">
                           <span>{item.cate}</span>
-                        </div>
+                        </div> 
                       </td>
                       <td className="py-3 px-6 text-center">
                         <span
