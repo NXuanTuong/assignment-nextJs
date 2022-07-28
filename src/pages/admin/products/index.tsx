@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import AdminLayout from "@/components/Layout/admin";
 import useProducts from "@/hooks/use-products";
-import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type Props = {};
@@ -19,8 +19,19 @@ const ProductAdmin = (props: Props) => {
             <h2 className="text-4xl font-bold text-center text-indigo-500">
               Bảng Sản Phẩm
             </h2>
-
-            <div className="bg-white shadow-md rounded my-6">
+            <Link href="/admin/products/add">
+              <button className="flex items-center bg-yellow-500 p-2 rounded-full float-right mr-5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15px"
+                  viewBox="0 0 448 512"
+                >
+                  <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
+                </svg>
+                <h1 className="ml-3">Thêm sản phẩm</h1>
+              </button>
+            </Link>
+            <div className="bg-white shadow-md rounded my-6 float-left">
               <table className="min-w-max w-full table-auto">
                 <thead>
                   <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -53,32 +64,38 @@ const ProductAdmin = (props: Props) => {
                       </td>
                       <td className="py-3 px-6 text-left">
                         <div className="flex items-center">
-                          <span>Eshal Rosas</span>
+                          <span>
+                            <img src={item.img} width="100px" alt="" />
+                          </span>
                         </div>
                       </td>
                       <td className="py-3 px-6 text-left">
                         <div className="flex items-center">
-                          <span>Eshal Rosas</span>
+                          <span>{item.price_new}đ</span>
                         </div>
                       </td>
                       <td className="py-3 px-6 text-left">
                         <div className="flex items-center">
-                          <span>Eshal Rosas</span>
+                          <span>{item.price_old}đ</span>
                         </div>
                       </td>
                       <td className="py-3 px-6 text-left">
                         <div className="flex items-center">
-                          <span>Eshal Rosas</span>
+                          <span>{item.desc}</span>
                         </div>
                       </td>
                       <td className="py-3 px-6 text-left">
                         <div className="flex items-center">
-                          <span>Eshal Rosas</span>
+                          <span>{item.cate}</span>
                         </div>
                       </td>
                       <td className="py-3 px-6 text-center">
-                        <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
-                          Active
+                        <span
+                          className={`text-white font-bold py-1 px-3 rounded-full text-xs ${
+                            item.status == "0" ? "bg-red-500" : "bg-green-500"
+                          }`}
+                        >
+                          {item.status == "0" ? "Hết Hàng" : "Còn Hàng"}
                         </span>
                       </td>
                       <td className="py-3 px-6 text-center">
