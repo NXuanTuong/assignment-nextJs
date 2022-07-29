@@ -21,7 +21,7 @@ const CategoryAdmin = (props: Props) => {
             <h2 className="text-4xl font-bold text-center text-indigo-500">
               Bảng Sản Phẩm
             </h2>
-            <Link href="/admin/products/add">
+            <Link href="/admin/categories/add">
               <button className="flex items-center bg-yellow-500 p-2 rounded-full float-right mr-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ const CategoryAdmin = (props: Props) => {
                 >
                   <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z" />
                 </svg>
-                <h1 className="ml-3">Thêm sản phẩm</h1>
+                <h1 className="ml-3">Thêm danh mục</h1>
               </button>
             </Link>
             <div className="bg-white shadow-md rounded my-6 mt-[50px]">
