@@ -97,7 +97,7 @@ const CategoryAdmin = (props: Props) => {
                             </svg>
                           </div>
                           <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                            <Link href={`/admin/products/edit/${item._id}`}>
+                            <Link href={`/admin/categories/edit/${item._id}`}>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
