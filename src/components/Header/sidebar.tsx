@@ -72,7 +72,7 @@ const SideBar = (props: Props) => {
                 />
               </svg>
 
-              <span className="ml-3 text-sm font-medium"><Link href="/admin/category">Category</Link>  </span>
+              <span className="ml-3 text-sm font-medium"><Link href="/admin/categories">Category</Link>  </span>
             </div>
 
             <details className="group">

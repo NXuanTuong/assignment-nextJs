@@ -60,7 +60,7 @@ const AdminHeader = (props: Props) => {
             <Link href={""}>Products</Link>
           </p>
           <p className="text-gray-900" >
-            <Link href={""}>Category</Link>
+            <Link href={"/admin/categories"}>Category</Link>
           </p>
           <p className="text-gray-900" >
             <Link href={""}>Account</Link>
