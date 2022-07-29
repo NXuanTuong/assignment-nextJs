@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 type Props = {};
 
 const CategoryAdmin = (props: Props) => {
-  const { data, error } = useCategories();
+  const { data, error, removeCate } = useCategories();
   if (!data) return <div>Loading...</div>;
   if (error) return <div>Falied</div>;
   return (
@@ -55,7 +55,7 @@ const CategoryAdmin = (props: Props) => {
                         </div>
                       </td>
                       <td className="py-3 px-6 text-left">
-                        <div className="flex items-center">
+                        <div className="flex items-center font-medium">
                           <span>{item.name}</span>
                         </div>
                       </td>
@@ -119,7 +119,7 @@ const CategoryAdmin = (props: Props) => {
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
-                              
+                              onClick={() => removeCate(item._id)}
                             >
                               <path
                                 strokeLinecap="round"
