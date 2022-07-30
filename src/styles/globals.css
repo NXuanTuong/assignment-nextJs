@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.product_item{
+    @apply overflow-hidden
+}
+.product_item:hover .icon_heart{
+    @apply visible 
+}
+.icon_heart{
+    @apply invisible overflow-hidden 
+}
+.icon_heart:hover{
+    @apply text-red-500
+}
+.feedback_item{
+    @apply -translate-x-14 duration-300
+}
+.product_item:hover .feedback_item{
+    @apply translate-x-0 
+}
+.feedback_item_product{
+    @apply -translate-x-20 duration-300
+}
+.product_item:hover .feedback_item_product{
+    @apply translate-x-0 
+}
+.feedback_item_product li:hover{
+    @apply scale-150 duration-300 
+}
+.feedback_item li:hover{
+    @apply scale-150 duration-300
+}
+.btn_add_cart{
+    @apply translate-y-24 duration-300 
+}
+.product_item:hover .btn_add_cart{
+    @apply translate-y-0
+}
