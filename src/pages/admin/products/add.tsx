@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import AdminLayout from "@/components/Layout/admin";
+import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
 import { useRouter } from "next/router";
 import React from "react";
@@ -10,12 +11,17 @@ type Props = {};
 
 const addProduct = (props: Props) => {
   const router = useRouter();
-  const { data, error, addProduct } = useProducts();
+  const { addProduct } = useProducts();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { data: categories, error: errorCate } = useCategories();
+  if (!categories) return <div>Loading...</div>;
+  if (errorCate) return <div>Falied</div>;
+
   const onSubmit: SubmitHandler<any> = async (data) => {
     await addProduct(data);
     toast.success("Thêm sản phẩm thành công");
@@ -64,7 +70,7 @@ const addProduct = (props: Props) => {
                   htmlFor="about"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Loại Hàng
+                  Trạng Thái
                 </label>
                 <select
                   className="p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 py-1 block w-full sm:text-sm border border-gray-300 rounded-md"
@@ -78,25 +84,26 @@ const addProduct = (props: Props) => {
               </div>
             </div>
 
-            {/* <div>
+            <div>
               <div>
                 <label
                   htmlFor="about"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Loại Hàng
+                  Danh Mục
                 </label>
                 <select
                   className="p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 py-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                   id=""
-                  {...register("cateogry")}
-                  name="status"
+                  {...register("category")}
+                  name="category" defaultValue=""
                 >
-                  <option value="0">Còn hàng</option>
-                  <option value="1">Hết hàng</option>
+                  {categories.map((item: any, index: any) => {
+                    return <option key={index} value={item._id}>{item.name}</option>;
+                  })}
                 </select>
               </div>
-            </div> */}
+            </div>
 
             <div>
               <label
