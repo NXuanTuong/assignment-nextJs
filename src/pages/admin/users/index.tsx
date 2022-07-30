@@ -2,11 +2,12 @@ import AdminLayout from '@/components/Layout/admin'
 import useUser from '@/hooks/use-users'
 import Link from 'next/link'
 import React from 'react'
+import { toast } from 'react-toastify'
 
 type Props = {}
 
 const ListUser = (props: Props) => {
-    const {data,error} = useUser()
+    const {data,error,updateRoleUser} = useUser()
     if(!data) return <div>Loading ....</div>
     if(error) return <div>Fail</div>
   return (
@@ -75,13 +76,21 @@ const ListUser = (props: Props) => {
                         </div>
                       </td>
                       <td className="py-3 px-6 text-center">
-                        <span
+                        <button
+                        
+                        onClick={()=> updateRoleUser(item._id,item.role == "0"? item.role = 1: item.role = 0).then(()=>{
+                            toast.success("Cập nhật thành công")
+                        })
+                        .catch((error)=>{
+                            toast.error(error.response.data.message)
+                        })
+                        }
                           className={`text-white font-bold py-1 px-3 rounded-full text-xs ${
                             item.role == "0" ? "bg-red-500" : "bg-green-500"
                           }`}
                         >
                           {item.role == "0" ? "Khách Hàng" : "Admin"}
-                        </span>
+                        </button>
                       </td>
                       <td className="py-3 px-6 text-center">
                         <span
