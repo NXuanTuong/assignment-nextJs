@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 const editCategory = () => {
   const router = useRouter();
   const id = router.query.id;
-  const { data, error, updateCate, readCate } = useCategories();
+  const { updateCate, readCate } = useCategories();
   const {
     register,
     handleSubmit,
