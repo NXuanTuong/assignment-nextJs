@@ -1,5 +1,5 @@
 
-import { signup } from "@/api/auth";
+import { signin, signup } from "@/api/auth";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 interface IAuthState {
     value:any[]
@@ -14,6 +14,13 @@ export const registerAuth = createAsyncThunk(
     return data
     }
 )
+export const loginAuth = createAsyncThunk(
+    "auth/loginAuth",
+    async (user)=>{
+    const data = await signin (user)
+    return data
+    }
+)
 
 const authSLice = createSlice({
     name:"auth",
@@ -24,6 +31,10 @@ const authSLice = createSlice({
         builder.addCase(registerAuth.fulfilled, (state,action)=>{
             console.log("fulfilled")
             state.value.push(action.payload)
+        })
+        builder.addCase(loginAuth.fulfilled, (state,action)=>{
+            console.log("fulfilled")
+            state.value = action.payload
         })
         
     }
