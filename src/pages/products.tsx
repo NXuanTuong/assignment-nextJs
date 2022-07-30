@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
 import Link from "next/link";
 import React from "react";
@@ -7,7 +8,8 @@ type Props = {};
 
 const Product = (props: Props) => {
   const { data: products, error } = useProducts();
-  if (!products) return <div>Loading...</div>;
+  const { data: categories } = useCategories();
+  if (!products && !categories) return <div>Loading...</div>;
   if (error) return <div>Falied</div>;
   return (
     <div>
@@ -75,7 +77,18 @@ const Product = (props: Props) => {
                 </h2>
               </ul>
               <div className="border p-5 bg-[#fbf9ff] shadow-md">
-                <ul></ul>
+                <ul>
+                  {categories.map((item: any, index: any) => (
+                    <li key={index} className="mb-2 border-b py-2">
+                      <Link
+                        href=""
+                        className="text-base cursor-pointer hover:text-red-500 font-semibold leading-4"
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
             <div className="mb-16">
@@ -254,7 +267,9 @@ const Product = (props: Props) => {
                       <span>
                         <p>
                           {item.status === "0" ? (
-                            <div className="absolute top-[5%] bg-gray-300 px-5 rounded-2xl text-white py-1 border -left-[5%]">Hết Hàng</div>
+                            <div className="absolute top-[5%] bg-gray-300 px-5 rounded-2xl text-white py-1 border -left-[5%]">
+                              Hết Hàng
+                            </div>
                           ) : (
                             <div className="absolute top-[5%] bg-green-500 px-5 rounded-2xl text-white py-1 border -left-[5%]">
                               Còn Hàng
