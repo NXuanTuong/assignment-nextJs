@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 type Props = {}
 
 const ListUser = (props: Props) => {
-    const {data,error,updateRoleUser} = useUser()
+    const {data,error,updateRoleUser,updateStatusUser} = useUser()
     if(!data) return <div>Loading ....</div>
     if(error) return <div>Fail</div>
   return (
@@ -93,13 +93,20 @@ const ListUser = (props: Props) => {
                         </button>
                       </td>
                       <td className="py-3 px-6 text-center">
-                        <span
+                        <button
+                        onClick={()=> updateStatusUser(item._id,item.status == "0"? item.status = 1: item.status = 0).then(()=>{
+                            toast.success("Cập nhật thành công")
+                        })
+                        .catch((error)=>{
+                            toast.error(error.response.data.message)
+                        })
+                        }
                           className={`text-white font-bold py-1 px-3 rounded-full text-xs ${
                             item.status == "0" ? "bg-green-500" : "bg-red-500"
                           }`}
                         >
                           {item.status == "0" ? "Kích Hoạt" : "Chưa kích Hoạt"}
-                        </span>
+                        </button>
                       </td>
                       <td className="py-3 px-6 text-center">
                         <div className="flex item-center justify-center">
