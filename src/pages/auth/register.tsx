@@ -1,13 +1,26 @@
+import { registerAuth } from "@/features/auth/auth.slice";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
-type Props = {};
 
-const RegisterPage = (props: Props) => {
+
+const RegisterPage = () => {
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const {register, handleSubmit, formState:{errors}} = useForm()
+  const onSubmit:SubmitHandler<any> = async (data)=>{
+    dispatch(registerAuth(data))
+    toast.success("Đăng ký thành công")
+    router.push("/auth/login")
+  } 
   return (
     <div className="w-[550px] mx-auto shadow-xl rounded-lg bg-white p-8 mt-5 mb-8">
       <h1 className="text-center font-medium text-3xl">Đăng Ký Tài Khoản</h1>
-      <form
+      <form onSubmit={handleSubmit(onSubmit)}
         className="mt-8 space-y-6"
         action="#"
         id="form-signin"
@@ -20,6 +33,8 @@ const RegisterPage = (props: Props) => {
             </label>
             <input
               type="email"
+              {...register('email')}
+              name="email"
               className="appearance-none  relative block w-full px-4 py-2 border border-[#f7f7f7]   bg-[#f7f7f7]  placeholder-gray-500 text-gray-900 rounded-full focus:outline-none focus:ring-[#f4e6c3] focus:border-[#f4e6c3] focus:border-4 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
@@ -30,6 +45,8 @@ const RegisterPage = (props: Props) => {
             </label>
             <input
               type="password"
+              {...register('password')}
+              name="password"
               autoComplete="current-password"
               className="appearance-none bg-[#f7f7f7]  relative block w-full px-4 py-2 border border-[#f7f7f7]   placeholder-gray-500 text-gray-900 rounded-full focus:outline-none focus: ring-[#f4e6c3] focus:border-4 focus:border-[#f4e6c3] focus:z-10 sm:text-sm"
               placeholder="Mật Khẩu"
@@ -41,6 +58,8 @@ const RegisterPage = (props: Props) => {
             </label>
             <input
               type="text"
+              {...register('name')}
+              name="name"
               className="appearance-none  relative block w-full px-4 py-2 border border-[#f7f7f7]   bg-[#f7f7f7]  placeholder-gray-500 text-gray-900 rounded-full focus:outline-none focus:ring-[#f4e6c3] focus:border-[#f4e6c3] focus:border-4 focus:z-10 sm:text-sm"
               placeholder="Họ Và Tên"
             />
@@ -51,6 +70,8 @@ const RegisterPage = (props: Props) => {
             </label>
             <input
               type="text"
+              {...register('address')}
+              name="address"
               className="appearance-none  relative block w-full px-4 py-2 border border-[#f7f7f7]   bg-[#f7f7f7]  placeholder-gray-500 text-gray-900 rounded-full focus:outline-none focus:ring-[#f4e6c3] focus:border-[#f4e6c3] focus:border-4 focus:z-10 sm:text-sm"
               placeholder="Địa Chỉ"
             />
@@ -61,6 +82,8 @@ const RegisterPage = (props: Props) => {
             </label>
             <input
               type="text"
+              {...register('phone')}
+              name="phone"
               className="appearance-none  relative block w-full px-4 py-2 border border-[#f7f7f7]   bg-[#f7f7f7]  placeholder-gray-500 text-gray-900 rounded-full focus:outline-none focus:ring-[#f4e6c3] focus:border-[#f4e6c3] focus:border-4 focus:z-10 sm:text-sm"
               placeholder="Số Điện Thoại"
             />

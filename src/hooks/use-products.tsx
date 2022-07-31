@@ -19,7 +19,7 @@ const useProducts = () => {
 
   const updateProduct = async (product: any) => {
     await update(product);
-    mutate(data.map((item: any) => (item.id === data.id ? product : item)));
+    mutate(data.map((item: any) => (item.id === product.id ? product : item)));
   };
    
   const readProduct = async (id: any) => {
