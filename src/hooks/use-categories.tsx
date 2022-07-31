@@ -26,7 +26,7 @@ const useCategories = () => {
   }
   const updateCate = async(category: any) => {
     await updateCategory(category);
-    mutate(data.map((item: any) => item.id === data.id ? category : item ));
+    mutate(data.map((item: any) => item.id === category.id ? category : item ));
     toast.success("Cập nhật danh mục thành công");
 
   }
