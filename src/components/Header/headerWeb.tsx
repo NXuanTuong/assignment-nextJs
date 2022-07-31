@@ -2,16 +2,10 @@ import { FaShoppingCart, FaUserAlt } from "react-icons/fa";
 import Link from "next/link";
 import React from "react";
 import style from "./Home.module.css";
-import HeaderWeb from "./headerWeb";
-import DropDownUser from "./dropDownUser";
 
 type Props = {};
 
-const Header = (props: Props) => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  if(!user){
-    return <HeaderWeb/>
-  }
+const HeaderWeb = (props: Props) => {
   return (
     <div>
       <div className={style.mainHeader}>
@@ -67,8 +61,16 @@ const Header = (props: Props) => {
             <div className={style.headerwrapaction}>
               <div className="form">
                 <div className={style.cssform}>
-                  <DropDownUser/>
-                  <p className="mr-[50px] ml-[10px]">Hello, <span className="font-bold">{user.user.email}</span> </p>
+                  <FaUserAlt />
+                  <ul>
+                    <li>
+                      <Link href="/auth/login">Đăng nhập</Link>
+                    </li>
+                    |
+                    <li>
+                      <Link href="/auth/register">Đăng ký</Link>
+                    </li>
+                  </ul>
                 </div>
               </div>
               <div className={style.cart}>
@@ -85,4 +87,4 @@ const Header = (props: Props) => {
   );
 };
 
-export default Header;
+export default HeaderWeb;
