@@ -1,4 +1,4 @@
-import { add, read, remove, update } from "@/api/product";
+import { add, read, remove, search, update } from "@/api/product";
 import React from "react";
 import useSWR from "swr";
 
@@ -26,13 +26,19 @@ const useProducts = () => {
     const getProduct = await read(id)
     return getProduct
   }
+
+  const searchProduct = async (q: any) => {
+    const getSearch = await search(q)
+    return getSearch
+  }
   return {
     data,
     error,
     addProduct,
     removeProduct,
     updateProduct,
-    readProduct
+    readProduct,
+    searchProduct
   };
 };
 
