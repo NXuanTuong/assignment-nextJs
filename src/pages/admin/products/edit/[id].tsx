@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { uploadFile } from "@/../utils/img";
 import AdminLayout from "@/components/Layout/admin";
 import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
@@ -26,12 +27,20 @@ const editProduct = (props: Props) => {
   const { data, error } = useCategories();
   if (!data) return <div>Loading...</div>;
   if (error) return <div>Failed</div>;
-  const onSubmit: SubmitHandler<any> = (product) => {
-    updateProduct(product);
-    setTimeout(() => {
-      router.push("/admin/products");
-    }, 800);
-    toast.success("Sửa sản phẩm thành công");
+  const onSubmit: SubmitHandler<any> = async (product) => {
+    try {
+      if(typeof product.img === "object" && product.img.length) {
+        product.img = await uploadFile(product.img[0])
+      }
+      console.log(product);
+      updateProduct(product);
+      setTimeout(() => {
+        router.push("/admin/products");
+      }, 800);
+      toast.success("Sửa sản phẩm thành công");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -62,7 +71,7 @@ const editProduct = (props: Props) => {
               <div className="space-y-1 text-center">
                 <input
                   id="file-upload"
-                  type="text"
+                  type="file"
                   placeholder="Ảnh Sản Phẩm"
                   className="p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 py-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                   {...register("img", { required: true })}
