@@ -9,14 +9,14 @@ const initialState:IAuthState = {
 }
 export const registerAuth = createAsyncThunk(
     "auth/registerAuth",
-    async (user)=>{
+    async (user:any)=>{
     const data = await signup(user)
     return data
     }
 )
 export const loginAuth = createAsyncThunk(
     "auth/loginAuth",
-    async (user)=>{
+    async (user:any)=>{
     const data = await signin (user)
     return data
     }
@@ -34,7 +34,7 @@ const authSLice = createSlice({
         })
         builder.addCase(loginAuth.fulfilled, (state,action)=>{
             console.log("fulfilled")
-            state.value = action.payload
+            state.value.push(action.payload)
         })
         
     }
