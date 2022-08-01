@@ -10,7 +10,7 @@ const ListProduct = ({newProduct}: any) => {
         <div>
           <div>
             <div className="grid grid-cols-3 mb-5 gap-10" id="product">
-              {newProduct &&
+              {newProduct.length > 0 && 
                 newProduct.map((item: any, index: any) => (
                   <div
                     key={index}
