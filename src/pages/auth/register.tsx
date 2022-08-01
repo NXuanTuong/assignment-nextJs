@@ -1,3 +1,5 @@
+import { signup } from "@/api/auth";
+import { AppDispatch } from "@/app/store";
 import { registerAuth } from "@/features/auth/auth.slice";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,12 +12,17 @@ import { toast } from "react-toastify";
 
 const RegisterPage = () => {
   const router = useRouter()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const {register, handleSubmit, formState:{errors}} = useForm()
   const onSubmit:SubmitHandler<any> = async (data)=>{
-    dispatch(registerAuth(data))
-    toast.success("Đăng ký thành công")
-    router.push("/auth/login")
+    try {
+      await signup(data)
+      dispatch(registerAuth(data))
+      toast.success("Đăng ký thành công")
+      router.replace("/auth/login")
+    } catch (error:any) {
+      toast.error(error.response.data.message)
+    }
   } 
   return (
     <div className="w-[550px] mx-auto shadow-xl rounded-lg bg-white p-8 mt-5 mb-8">
