@@ -4,11 +4,14 @@ import React from "react";
 import style from "./Home.module.css";
 import HeaderWeb from "./headerWeb";
 import DropDownUser from "./dropDownUser";
+import useUser from "@/hooks/use-users";
 
 type Props = {};
 
 const Header = (props: Props) => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user') as string);
+  const {readUser} = useUser();
+  
   if(!user){
     return <HeaderWeb/>
   }

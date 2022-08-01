@@ -1,4 +1,4 @@
-import { updateRole, updateStatus } from '@/api/user'
+import { getUser, updateRole, updateStatus } from '@/api/user'
 import React from 'react'
 import useSWR from 'swr'
 
@@ -17,10 +17,15 @@ const useUser = () => {
         });
           mutate(data.map((item: any) => (item.id === id ? item.status = status :item.status)));
       }
+      const readUser = async (id:any) => {
+        const getUserById = await getUser(id)
+        return getUserById
+      }
   return {
     data,
     updateRoleUser,
     updateStatusUser,
+    readUser,
     error
   }
 }

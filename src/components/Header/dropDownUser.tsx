@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
@@ -9,7 +10,6 @@ const DropDownUser = (props: Props) => {
   const router = useRouter();
   const logOut = () => {
     localStorage.removeItem('user');
-    router.push('/');
   }
   return (
     <div>
@@ -18,9 +18,10 @@ const DropDownUser = (props: Props) => {
             <FaUserAlt/>
         </button>
         <div className={style['dropdown-content']}>
-          <a href="#">Thông tin</a>
-          <a href="#">Cập nhật</a>
-          <a href=""  onClick={() => logOut()}>Đăng xuất</a>
+          <Link href="/user/detail">Thông tin</Link>
+          <Link href="#">Cập nhật</Link>
+          <p onClick={() => logOut()}> <Link href="">Đăng xuất</Link></p>
+          
         </div>
       </div>
     </div>
