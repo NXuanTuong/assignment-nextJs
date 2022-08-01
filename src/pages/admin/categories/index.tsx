@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 type Props = {};
 
 const CategoryAdmin = (props: Props) => {
-  const { data, error, removeCate } = useCategories();
+  const { data, error, removeCate, updateStatus } = useCategories();
   if (!data) return <div>Loading...</div>;
   if (error) return <div>Falied</div>;
   return (
@@ -19,7 +19,7 @@ const CategoryAdmin = (props: Props) => {
         <div className="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
           <div className="w-full lg:w-5/6">
             <h2 className="text-4xl font-bold text-center text-indigo-500">
-              Bảng Sản Phẩm
+              Bảng danh mục
             </h2>
             <Link href="/admin/categories/add">
               <button className="flex items-center bg-yellow-500 p-2 rounded-full float-right mr-5">
@@ -59,18 +59,29 @@ const CategoryAdmin = (props: Props) => {
                           <span>{item.name}</span>
                         </div>
                       </td>
-                      
-                      
-                      
-                      
-                      
+
                       <td className="py-3 px-6 text-center">
                         <span
+                          typeof="button"
+                          onClick={() =>
+                            updateStatus(
+                              item._id,
+                              item.status == "0"
+                                ? (item.status = 1)
+                                : (item.status = 0)
+                            )
+                              .then(() => {
+                                toast.success("Cập nhật thành công");
+                              })
+                              .catch((error) => {
+                                toast.error(error.response.data.message);
+                              })
+                          }
                           className={`text-white font-bold py-1 px-3 rounded-full text-xs ${
-                            item.status == "0" ? "bg-red-500" : "bg-green-500"
+                            item.status == "0" ?  "bg-green-500":"bg-red-500" 
                           }`}
                         >
-                          {item.status == "0" ? "Hết Hàng" : "Còn Hàng"}
+                          {item.status == "0" ? "Đã kích hoạt" : "Chưa kích hoạt"}
                         </span>
                       </td>
                       <td className="py-3 px-6 text-center">

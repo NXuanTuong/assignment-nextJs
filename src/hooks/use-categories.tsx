@@ -1,4 +1,4 @@
-import { addCategory, readCategory, removeCategory, updateCategory } from "@/api/category";
+import { addCategory, readCategory, removeCategory, updateCategory, updateStatusCate } from "@/api/category";
 import { add, read, remove, update } from "@/api/product";
 import React from "react";
 import useSWR from "swr";
@@ -28,7 +28,13 @@ const useCategories = () => {
     await updateCategory(category);
     mutate(data.map((item: any) => item.id === category.id ? category : item ));
     toast.success("Cập nhật danh mục thành công");
-
+  }
+  const updateStatus = async (id:any,newStatus:any)=>{
+    await updateStatusCate(id,{
+      status:newStatus
+    });
+    
+    mutate(data.map((item: any) => (item.id === id ? item.status = newStatus :item.status)));
   }
   return {
     data,
@@ -36,6 +42,7 @@ const useCategories = () => {
     addCate,
     removeCate,
     readCate,
+    updateStatus,
     updateCate
   };
 };
