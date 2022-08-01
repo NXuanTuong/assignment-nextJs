@@ -93,10 +93,10 @@ const ProductAdmin = (props: Props) => {
                       <td className="py-3 px-6 text-center">
                         <span
                           className={`text-white font-bold py-1 px-3 rounded-full text-xs ${
-                            item.status == "0" ? "bg-red-500" : "bg-green-500"
+                            item.status == "0" ?  "bg-green-500" : "bg-red-500"
                           }`}
                         >
-                          {item.status == "0" ? "Hết Hàng" : "Còn Hàng"}
+                          {item.status == "0" ? "Còn Hàng" : "Hết Hàng"}
                         </span>
                       </td>
                       <td className="py-3 px-6 text-center">
