@@ -3,17 +3,18 @@ import Link from "next/link";
 import React from "react";
 import style from "./Home.module.css";
 import HeaderWeb from "./headerWeb";
-import DropDownUser from "./dropDownUser";
 import useUser from "@/hooks/use-users";
+import DropDownUser from "./dropDownUser";
 
 type Props = {};
 
 const Header = (props: Props) => {
-  const user = JSON.parse(localStorage.getItem('user') as string);
-  const {readUser} = useUser();
+  const user = JSON.parse(localStorage.getItem("user") as string);
   
-  if(!user){
-    return <HeaderWeb/>
+  const { readUser } = useUser();
+  
+  if (!user) {
+    return <HeaderWeb />;
   }
   return (
     <div>
@@ -27,9 +28,7 @@ const Header = (props: Props) => {
                 itemType="http://schema.org/Organization"
               >
                 <h1>
-                  <a itemProp="url">
-                    SkyBook
-                  </a>
+                  <a itemProp="url">SkyBook</a>
                 </h1>
               </div>
             </div>
@@ -70,8 +69,10 @@ const Header = (props: Props) => {
             <div className={style.headerwrapaction}>
               <div className="form">
                 <div className={style.cssform}>
-                  <DropDownUser/>
-                  <p className="mr-[50px] ml-[10px]">Hello, <span className="font-bold">{user.user.email}</span> </p>
+                 <DropDownUser/>
+                  <p className="mr-[50px] ml-[10px]">
+                    Hello, <span className="font-bold">{user.user.email}</span>{" "}
+                  </p>
                 </div>
               </div>
               <div className={style.cart}>

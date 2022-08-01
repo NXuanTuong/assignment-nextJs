@@ -10,6 +10,7 @@ const DropDownUser = (props: Props) => {
   const router = useRouter();
   const logOut = () => {
     localStorage.removeItem('user');
+    router.replace('/')
   }
   return (
     <div>
@@ -19,7 +20,7 @@ const DropDownUser = (props: Props) => {
         </button>
         <div className={style['dropdown-content']}>
           <Link href="/user/detail">Thông tin</Link>
-          <Link href="#">Cập nhật</Link>
+          <Link href="/user/edit">Cập nhật</Link>
           <p onClick={() => logOut()}> <Link href="">Đăng xuất</Link></p>
           
         </div>
