@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { uploadFile } from "@/../utils/img";
 import AdminLayout from "@/components/Layout/admin";
@@ -93,8 +94,8 @@ const editProduct = (props: Props) => {
                   {...register("status")}
                   name="status"
                 >
-                  <option value="0">Hết Hàng</option>
-                  <option value="1">Còn Hàng</option>
+                  <option value="0">Còn Hàng</option>
+                  <option value="1">Hết Hàng</option>
                 </select>
               </div>
             </div>
