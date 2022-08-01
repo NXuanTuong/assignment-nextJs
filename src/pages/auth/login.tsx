@@ -1,4 +1,5 @@
 import { signin } from "@/api/auth";
+import { AppDispatch } from "@/app/store";
 import { loginAuth } from "@/features/auth/auth.slice";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,15 +11,15 @@ import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const router = useRouter()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const {register, handleSubmit, formState:{errors}} = useForm()
     const onSubmit:SubmitHandler<any> = async  (data)=>{  
       try {
         const user = await signin(data)
-        dispatch(loginAuth(user))
+        dispatch(loginAuth(data ))
         localStorage.setItem('user', JSON.stringify(user))
         toast.success("Đăng nhập thành công")
-        router.push('/')
+        router.replace('/')
       } catch (error:any) {
         toast.error(error.response.data.message)
       }
