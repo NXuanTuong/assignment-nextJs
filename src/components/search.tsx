@@ -8,6 +8,9 @@ const Search = (props: Props) => {
   const handleSearch = (e: any) => {
     e.preventDefault();
     router.replace(`?q=${props.search}`);
+    if (!props.search) {
+      return router.push("/products");
+    }
   };
   return (
     <div>
