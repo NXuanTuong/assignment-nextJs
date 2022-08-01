@@ -15,23 +15,23 @@ const Product = (props: Props) => {
   const [searchTerm, setsearchTerm] = useState<any>("");
   const [newProduct, setnewProduct] = useState([]);
   const { data: categories, error } = useCategories();
-  const { data: products, searchProduct } = useProducts();
+  const { searchProduct } = useProducts();
   const router = useRouter();
   let q = router.query.q;
+  console.log(q);
 
   useEffect(() => {
     const getProduct = async () => {
-      if (q) {
-        const dataList: any = await searchProduct(q);
-        console.log(dataList);
-        setnewProduct(dataList);
-      } if (!newProduct) {
-        setnewProduct(products);
-      }
+      const dataproduct = await (
+        await fetch("http://localhost:8000/api/products")
+      ).json();
+      if (!q) return setnewProduct(dataproduct);
+      const dataList: any = await searchProduct(q);
+      setnewProduct(dataList);
     };
     getProduct();
   }, [q]);
-  if (!categories || !products) return <div>Loading...</div>;
+  if (!categories) return <div>Loading...</div>;
   if (error) return <div>Falied</div>;
   return (
     <div>
