@@ -12,3 +12,6 @@ export const updateCategory = (category: any) => {
 export const readCategory = (id: any) => {
     return instance.get(`/category/${id}`)
 }
+export const updateStatusCate = (id:any,status:any)=>{
+    return instance.put(`/category/${id}`,status)
+}

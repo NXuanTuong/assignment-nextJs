@@ -54,16 +54,16 @@ const AdminHeader = (props: Props) => {
 
         <nav className="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
           <p className="text-gray-900" >
-            <Link href={""}>DashBoard</Link>
+            <Link href={"/admin"}>DashBoard</Link>
           </p>
           <p className="text-gray-900" >
-            <Link href={""}>Products</Link>
+            <Link href={"/admin/products"}>Products</Link>
           </p>
           <p className="text-gray-900" >
             <Link href={"/admin/categories"}>Category</Link>
           </p>
           <p className="text-gray-900" >
-            <Link href={""}>Account</Link>
+            <Link href={"/admin/users"}>Account</Link>
           </p>
         </nav>
 
