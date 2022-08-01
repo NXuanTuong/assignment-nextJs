@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { uploadFile } from "@/../utils/img";
 import AdminLayout from "@/components/Layout/admin";
 import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
@@ -23,9 +24,15 @@ const addProduct = (props: Props) => {
   if (errorCate) return <div>Falied</div>;
 
   const onSubmit: SubmitHandler<any> = async (data) => {
-    await addProduct(data);
-    toast.success("Thêm sản phẩm thành công");
-    router.push("/admin/products");
+    try {
+      const url = await uploadFile(data.img[0]);
+      data.img = url;
+      await addProduct(data);
+      toast.success("Thêm sản phẩm thành công");
+      router.replace("/admin/products");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -56,7 +63,7 @@ const addProduct = (props: Props) => {
               <div className="space-y-1 text-center">
                 <input
                   id="file-upload"
-                  type="text"
+                  type="file"
                   placeholder="Ảnh Sản Phẩm"
                   className="p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 py-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                   {...register("img", { required: true })}
@@ -96,10 +103,15 @@ const addProduct = (props: Props) => {
                   className="p-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 py-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                   id=""
                   {...register("category")}
-                  name="category" defaultValue=""
+                  name="category"
+                  defaultValue=""
                 >
                   {categories.map((item: any, index: any) => {
-                    return <option key={index} value={item._id}>{item.name}</option>;
+                    return (
+                      <option key={index} value={item._id}>
+                        {item.name}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
