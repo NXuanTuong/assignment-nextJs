@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import Link from "next/link";
 import React from "react";
+import { FaArrowLeft } from "react-icons/fa";
 
 type Props = {};
 
@@ -9,7 +10,7 @@ const SideBar = (props: Props) => {
     <div className="">
       <div className="flex flex-col justify-between h-screen bg-white border-r-[3px]">
         <div className="px-4 py-6">
-          <span className="block font-bold h-10 rounded-lg text-center text-xl">SKYBOOK</span>
+          <span className="block font-bold h-10 rounded-lg text-center text-xl"><Link href={"/"}>SKYBOOK</Link></span>
 
           <nav className="flex flex-col mt-6 space-y-1">
             <div
@@ -91,9 +92,18 @@ const SideBar = (props: Props) => {
 
                 
               </summary>
-
+              
               
             </details>
+            <div
+              
+              className="flex items-center px-4 py-2 text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700"
+            >
+              
+              <FaArrowLeft/>
+
+              <span className="ml-3 text-sm font-medium"><Link href="/">Back to shop</Link>  </span>
+            </div>
           </nav>
         </div>
 
