@@ -96,7 +96,7 @@ const Product = (props: Props) => {
               <ul>
                 <Search search={searchTerm} onchange={setsearchTerm} />
                 <h2 className="text-2xl border-b-[1px] mx-[-16px] px-4 py-4 font-bold text-gray-900">
-                  Tìm kiếm: {}
+                  Tìm kiếm: {q}
                 </h2>
               </ul>
               <div className="border p-5 bg-[#fbf9ff] shadow-md">
@@ -285,10 +285,12 @@ const Product = (props: Props) => {
                         className="px-3 py-7 shadow hover:shadow-lg product_item"
                       >
                         <div className="relative overflow-hidden">
-                          <img
-                            src={item.img}
-                            className="object-cover w-full h-64"
-                          />
+                          <Link href={`/product-details/${item._id}`}>
+                            <img
+                              src={item.img}
+                              className="object-cover w-full h-64 cursor-pointer"
+                            />
+                          </Link>
                           <span>
                             <p>
                               {item.status === "0" ? (
@@ -335,9 +337,11 @@ const Product = (props: Props) => {
                         </div>
                         <div>
                           <div>
-                            <h3 className="text-base mb-2 font-semibold text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden">
-                              {item.name}
-                            </h3>
+                            <Link href={`/product-details/${item._id}`}>
+                              <h3 className="text-base mb-2 font-semibold cursor-pointer text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden">
+                                {item.name}
+                              </h3>
+                            </Link>
                             <div className="flex justify-center items-center">
                               <del className="text-red-300">
                                 <span>{item.price_old}đ</span>
