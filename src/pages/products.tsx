@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { search } from "@/api/product";
+import Category from "@/components/category";
 import ListProduct from "@/components/list-product";
 import Search from "@/components/search";
 import useCategories from "@/hooks/use-categories";
 import useProducts from "@/hooks/use-products";
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -15,23 +14,29 @@ type Props = {};
 const Product = (props: Props) => {
   const [searchTerm, setsearchTerm] = useState<any>("");
   const [newProduct, setnewProduct] = useState([]);
-  const { data: categories, error } = useCategories();
+  const { data: categories, error, readCate } = useCategories();
   const { searchProduct } = useProducts();
   const router = useRouter();
   let q = router.query.q;
-  console.log(q);
-
+  let id = router.query.id;
+  console.log(id);
   useEffect(() => {
     const getProduct = async () => {
       const dataproduct = await (
         await fetch("http://localhost:8000/api/products")
       ).json();
+      if (id) {
+        const dataCate: any = await readCate(id);
+        return setnewProduct(dataCate.product);
+      }
+      if (q) {
+        const dataList: any = await searchProduct(q);
+        return setnewProduct(dataList);
+      }
       if (!q) return setnewProduct(dataproduct);
-      const dataList: any = await searchProduct(q);
-      setnewProduct(dataList);
     };
     getProduct();
-  }, [q]);
+  }, [id, q]);
   if (!categories) return <div>Loading...</div>;
   if (error) return <div>Falied</div>;
   return (
@@ -97,22 +102,11 @@ const Product = (props: Props) => {
               <ul>
                 <Search search={searchTerm} onchange={setsearchTerm} />
                 <h2 className="text-2xl border-b-[1px] mx-[-16px] px-4 py-4 font-bold text-gray-900">
-                  Tìm kiếm: {q}
+                  {/* Tìm kiếm: {q} */}
                 </h2>
               </ul>
               <div className="border p-5 bg-[#fbf9ff] shadow-md">
-                <ul>
-                  {categories.map((item: any, index: any) => (
-                    <li key={index} className="mb-2 border-b py-2">
-                      <Link
-                        href=""
-                        className="text-base cursor-pointer hover:text-red-500 font-semibold leading-4"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <Category categories={categories} />
               </div>
             </div>
             <div className="mb-16">

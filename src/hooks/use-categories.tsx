@@ -22,6 +22,7 @@ const useCategories = () => {
   }
   const readCate = async(id: any) => {
     const getCategory =  await readCategory(id);
+    console.log(getCategory);
     return getCategory
   }
   const updateCate = async(category: any) => {
