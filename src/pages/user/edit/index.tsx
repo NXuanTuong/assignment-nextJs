@@ -12,7 +12,7 @@ type Props = {}
 const Detail = (props: Props) => {
   const { data, error, readUser, updateUser } = useUser();
   const router = useRouter()
-  const user = JSON.parse(localStorage.getItem("user") as string);
+  const userLs = JSON.parse(localStorage.getItem("user") as string);
 
   const {
     register,
@@ -21,11 +21,10 @@ const Detail = (props: Props) => {
     reset
   } = useForm();
   
-  const id = user.user._id
   
   useEffect(() => {
-    readUser(id).then((res: any) => reset(res));
-  },[id])
+    readUser(userLs.user._id).then((res: any) => reset(res));
+  },[])
   const onSubmit: SubmitHandler<any> = async (user) => {
     await updateUser(user);
     toast.success("Cập nhật thông tin thành công");
@@ -33,8 +32,7 @@ const Detail = (props: Props) => {
       router.push("/user/detail");
     }, 800);
   };
-  if (!data) return <div>Loading...</div>;
-  if (error) return <div>Falied</div>;
+  
 
   return (
     <div className="bg-gray-100 max-w-screen-xl  mx-auto">
