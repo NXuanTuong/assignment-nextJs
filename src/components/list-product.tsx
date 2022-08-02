@@ -17,7 +17,7 @@ const ListProduct = ({newProduct}: any) => {
                     className="px-3 py-7 shadow hover:shadow-lg product_item"
                   >
                     <div className="relative overflow-hidden">
-                      <Link href={`/product-details/${item._id}?category=${item.category._id}`}>
+                      <Link href={`/product-details/${item._id}?category=${typeof item.category === "object" ? item.category._id : item.category}`}>
                         <img
                           src={item.img}
                           className="object-cover w-full h-64 cursor-pointer"
