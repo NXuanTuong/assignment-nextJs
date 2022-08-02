@@ -22,8 +22,8 @@ const useProducts = () => {
     mutate(data.map((item: any) => (item.id === product.id ? product : item)));
   };
    
-  const readProduct = async (id: any) => {
-    const getProduct = await read(id)
+  const readProduct = async (id: any,category:any) => {
+    const getProduct = await read(id,category)
     return getProduct
   }
 

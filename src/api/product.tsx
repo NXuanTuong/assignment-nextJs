@@ -9,8 +9,8 @@ export const remove = (id: any) => {
 export const update = (product: any) => {
   return instance.put(`/products/${product._id}`, product);
 };
-export const read = (id: any) => {
-  return instance.get(`/products/${id}`);
+export const read = (id: any,category:any) => {
+  return instance.get(`/products/${id}?category=${category}`);
 };
 export const search = (q: any) => {
   return instance.get(`/product/search?q=${q}`);

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import useProducts from "@/hooks/use-products";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -9,16 +10,18 @@ type Props = {};
 const ProductDetails = (props: Props) => {
   const router = useRouter();
   const id = router.query.id;
+  const category = router.query.category;
   const { readProduct } = useProducts();
   const [products, setProducts] = useState<any>([]);
 
   useEffect(() => {
     const getProduct = async () => {
-      const data: any = await readProduct(id);
+      const data: any = await readProduct(id, category);
       setProducts(data);
     };
     getProduct();
   }, [id]);
+  console.log(products);
   return (
     <div>
       <div>
@@ -48,7 +51,7 @@ const ProductDetails = (props: Props) => {
           <div className="grid grid-cols-2 gap-10">
             <div>
               <img
-                src={products.img}
+                src={products.product?.img}
                 className="object-cover h-full w-full rounded-xl max-w-full"
               />
               <div className="flex justify-between border border-grey-800 rounded-xl px-2 py-3 mt-2">
@@ -69,17 +72,19 @@ const ProductDetails = (props: Props) => {
             <div>
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="text-xl w-96 font-semibold">{products.name}</p>
+                  <p className="text-xl w-96 font-semibold">
+                    {products.product?.name}
+                  </p>
                 </div>
                 <div>
                   <div className="px-3">
                     <p className="text-red-500 text-base">
-                      <del>$ {products.price_old}</del>
+                      <del>$ {products.product?.price_old}</del>
                     </p>
                   </div>
                   <div>
                     <p className="text-lg font-semibold">
-                      $ {products.price_new}
+                      $ {products.product?.price_new}
                     </p>
                   </div>
                 </div>
@@ -133,7 +138,9 @@ const ProductDetails = (props: Props) => {
               </div>
               <div className="mt-10">
                 <p className="text-base font-semibold mb-4">Description</p>
-                <p className="text-base text-gray-500 mb-3">{products.desc}</p>
+                <p className="text-base text-gray-500 mb-3">
+                  {products.product?.desc}
+                </p>
                 <p className="text-base text-gray-500 mb-3">
                   Sách có lẽ rằng là một trong những ý tưởng quan trọng và vĩ
                   đại nhất của con người. Mỗi cuốn sách là kết tinh từ tri thức
@@ -358,12 +365,16 @@ const ProductDetails = (props: Props) => {
               <div>
                 <div>
                   <div className="grid grid-cols-4 mb-5 gap-10">
-                    <div className="px-3 py-7 rounded-lg shadow hover:shadow-lg product_item">
+                    {products.productRelated && products.productRelated.map((item:any,index:any)=>(
+                      
+                    <div key={index} className="px-3 py-7 rounded-lg shadow hover:shadow-lg product_item">
                       <div className="relative overflow-hidden">
+                      <Link href={`/product-details/${item._id}?category=${item.category}`}>
                         <img
-                          src="https://picsum.photos/200/300"
-                          className="object-cover w-full max-w-full h-64"
+                          src={item.img}
+                          className="object-cover w-full h-64 cursor-pointer"
                         />
+                      </Link>
                         <span className="absolute top-[5%] px-5 rounded-2xl text-white bg-red-300 py-1 border -left-[5%]">
                           <p>20%</p>
                         </span>
@@ -400,164 +411,15 @@ const ProductDetails = (props: Props) => {
                       </div>
                       <div>
                         <h3 className="text-base mb-2 font-semibold text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden">
-                          <a>Nguyen Xuan Tuong</a>
+                          <a>{item.name}</a>
                         </h3>
                         <div className="flex justify-center items-center">
-                          <del className="text-red-300">$ 150.000</del>
-                          <p className="px-2 font-semibold text-lg">$100.000</p>
+                          <del className="text-red-300"> {item.price_old} </del>
+                          <p className="px-2 font-semibold text-lg">{item.price_new}</p>
                         </div>
                       </div>
                     </div>
-                    <div className="px-3 py-7 shadow rounded-lg hover:shadow-lg product_item">
-                      <div className="relative overflow-hidden">
-                        <img
-                          src="https://picsum.photos/200/300"
-                          className="object-cover w-full max-w-full h-64"
-                        />
-                        <span className="absolute top-[5%] px-5 rounded-2xl text-white bg-red-300 py-1 border -left-[5%]">
-                          <p>20%</p>
-                        </span>
-                        <span className="text-black icon_heart cursor-pointer absolute text-2xl -top-[2%] right-[9px] hover:text-red-500">
-                          <i className="bi bi-heart" />
-                        </span>
-                        <div className="absolute top-[47%] -left-[5%] mx-5 feedback_item_product">
-                          <ul>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="cursor-pointer">
-                              <i className="bi bi-star" />
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="hover:bg-red-500 btn_add_cart cursor-pointer top-[80%] left-[20%] delay-150 duration-200 ease-in-out py-1 px-3 rounded-md text-red-500 hover:text-white border border-red-400 font-semibold uppercase absolute">
-                          <a>
-                            Add to Cart{" "}
-                            <span>
-                              <i className="fas fa-shopping-cart" />
-                            </span>
-                          </a>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-base mb-2 font-semibold text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden">
-                          <a>Nguyen Xuan Tuong</a>
-                        </h3>
-                        <div className="flex justify-center items-center">
-                          <del className="text-red-300">$ 150.000</del>
-                          <p className="px-2 font-semibold text-lg">$100.000</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="px-3 py-7 shadow rounded-lg hover:shadow-lg product_item">
-                      <div className="relative overflow-hidden">
-                        <img
-                          src="https://picsum.photos/200/300"
-                          className="object-cover w-full max-w-full h-64"
-                        />
-                        <span className="absolute top-[5%] px-5 rounded-2xl text-white bg-red-300 py-1 border -left-[5%]">
-                          <p>20%</p>
-                        </span>
-                        <span className="text-black icon_heart cursor-pointer absolute text-2xl -top-[2%] right-[9px] hover:text-red-500">
-                          <i className="bi bi-heart" />
-                        </span>
-                        <div className="absolute top-[47%] -left-[5%] mx-5 feedback_item_product">
-                          <ul>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="cursor-pointer">
-                              <i className="bi bi-star" />
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="hover:bg-red-500 btn_add_cart cursor-pointer top-[80%] left-[20%] delay-150 duration-200 ease-in-out py-1 px-3 rounded-md text-red-500 hover:text-white border border-red-400 font-semibold uppercase absolute">
-                          <a>
-                            Add to Cart{" "}
-                            <span>
-                              <i className="fas fa-shopping-cart" />
-                            </span>
-                          </a>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-base mb-2 font-semibold text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden">
-                          <a>Nguyen Xuan Tuong</a>
-                        </h3>
-                        <div className="flex justify-center items-center">
-                          <del className="text-red-300">$ 150.000</del>
-                          <p className="px-2 font-semibold text-lg">$100.000</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="px-3 py-7 shadow rounded-lg hover:shadow-lg product_item">
-                      <div className="relative overflow-hidden">
-                        <img
-                          src="https://picsum.photos/200/300"
-                          className="object-cover w-full max-w-full h-64"
-                        />
-                        <span className="absolute top-[5%] px-5 rounded-2xl text-white bg-red-300 py-1 border -left-[5%]">
-                          <p>20%</p>
-                        </span>
-                        <span className="text-black icon_heart cursor-pointer absolute text-2xl -top-[2%] right-[9px] hover:text-red-500">
-                          <i className="bi bi-heart" />
-                        </span>
-                        <div className="absolute top-[47%] -left-[5%] mx-5 feedback_item_product">
-                          <ul>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="text-yellow-300 cursor-pointer">
-                              <i className="bi bi-star-fill" />
-                            </li>
-                            <li className="cursor-pointer">
-                              <i className="bi bi-star" />
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="hover:bg-red-500 btn_add_cart cursor-pointer top-[80%] left-[20%] delay-150 duration-200 ease-in-out py-1 px-3 rounded-md text-red-500 hover:text-white border border-red-400 font-semibold uppercase absolute">
-                          <a>
-                            Add to Cart{" "}
-                            <span>
-                              <i className="fas fa-shopping-cart" />
-                            </span>
-                          </a>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-base mb-2 font-semibold text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden">
-                          <a>Nguyen Xuan Tuong</a>
-                        </h3>
-                        <div className="flex justify-center items-center">
-                          <del className="text-red-300">$ 150.000</del>
-                          <p className="px-2 font-semibold text-lg">$100.000</p>
-                        </div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
