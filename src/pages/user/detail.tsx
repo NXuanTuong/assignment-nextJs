@@ -3,20 +3,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Layout from '@/components/Layout'
 import useUser from '@/hooks/use-users';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 
 type Props = {}
 
 const Detail = (props: Props) => {
   const [user, setUser] = useState<any>()
+  const router = useRouter()
   const { data, error, readUser } = useUser();
   const userLs = JSON.parse(localStorage.getItem('user') as string)
-  const id = userLs.user._id;
   useEffect(() => {
-    readUser(id).then((res: any) => setUser(res));
-  },[id])
-  if (!userLs) return <div>Loading...</div>;
-  if (error) return <div>Falied</div>;
+    readUser(userLs.user._id).then((res: any) => setUser(res));
+  },[])
+  
   
   
   
