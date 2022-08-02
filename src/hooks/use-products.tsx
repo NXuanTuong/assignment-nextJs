@@ -1,4 +1,4 @@
-import { add, read, remove, search, update } from "@/api/product";
+import { add, detail, read, remove, search, update } from "@/api/product";
 import React from "react";
 import useSWR from "swr";
 
@@ -22,8 +22,12 @@ const useProducts = () => {
     mutate(data.map((item: any) => (item.id === product.id ? product : item)));
   };
    
-  const readProduct = async (id: any,category:any) => {
-    const getProduct = await read(id,category)
+  const readProduct = async (id: any) => {
+    const getProduct = await read(id)
+    return getProduct
+  }
+  const detailProduct = async (id: any,category:any) => {
+    const getProduct = await detail(id,category)
     return getProduct
   }
 
@@ -37,6 +41,7 @@ const useProducts = () => {
     addProduct,
     removeProduct,
     updateProduct,
+    detailProduct,
     readProduct,
     searchProduct
   };
