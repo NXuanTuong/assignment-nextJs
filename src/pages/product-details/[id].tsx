@@ -11,12 +11,12 @@ const ProductDetails = (props: Props) => {
   const router = useRouter();
   const id = router.query.id;
   const category = router.query.category;
-  const { readProduct } = useProducts();
+  const { detailProduct } = useProducts();
   const [products, setProducts] = useState<any>([]);
 
   useEffect(() => {
     const getProduct = async () => {
-      const data: any = await readProduct(id, category);
+      const data: any = await detailProduct(id, category);
       setProducts(data);
     };
     getProduct();
