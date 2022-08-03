@@ -11,7 +11,7 @@ type Props = {};
 
 const Cart = (props: Props) => {
   const router = useRouter();
-  const {data, error, increase} = useCart();
+  const {data, error, increase, decrease} = useCart();
   let cart: any = [];
   if (localStorage.getItem("cart")) {
     cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -29,6 +29,11 @@ const Cart = (props: Props) => {
   };
   const handleIncrease = (id: any) => {
     increase(id);
+    toast.success("Bạn thêm sản phẩm thành công")
+  }
+  const handleDecrease = (id: any) => {
+    decrease(id);
+    toast.success("Bạn giảm sản phẩm thành công")
   }
   return (
     <div>
@@ -116,7 +121,7 @@ const Cart = (props: Props) => {
                                   {item.name}
                                 </td>
                                 <td className=" w-[120px] text-center">
-                                  <button className="btn btn-decrease  text-lg font-semibold border bg-orange-500 text-white">
+                                  <button onClick={() => handleDecrease(item._id)} className="btn btn-decrease  text-lg font-semibold border bg-orange-500 text-white">
                                     <FaAngleLeft />
                                   </button>
                                   <input
