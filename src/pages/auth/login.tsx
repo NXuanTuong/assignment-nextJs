@@ -7,13 +7,30 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup"
 
-
+const schema = yup.object().shape({
+  email: yup
+      .string()
+      .required("Vui lòng nhập địa chỉ email")
+      .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, "Email không đúng định dạng"),
+  password: yup
+      .string()
+      .required("Vui lòng nhập mật khẩu")
+      .min(6,"Mật khẩu tối thiểu từ 6 ký tự")
+});
+type FormInput={
+  email:string,
+  password:string|number
+}
 const LoginPage = () => {
   const router = useRouter()
     const dispatch = useDispatch<AppDispatch>()
-    const {register, handleSubmit, formState:{errors}} = useForm()
-    const onSubmit:SubmitHandler<any> = async  (data)=>{  
+    const {register, handleSubmit, formState:{errors}} = useForm<FormInput>({
+      resolver: yupResolver(schema)
+    })
+    const onSubmit:SubmitHandler<FormInput> = async  (data)=>{  
       try {
         const user = await signin(data)
         dispatch(loginAuth(data ))
@@ -39,12 +56,13 @@ const LoginPage = () => {
               Email
             </label>
             <input
-              type="email"
+              type="text"
               {...register('email')}
               name="email"
               className="appearance-none  relative block w-full px-4 py-2 border border-[#f7f7f7]   bg-[#f7f7f7]  placeholder-gray-500 text-gray-900 rounded-full focus:outline-none focus:ring-[#f4e6c3] focus:border-[#f4e6c3] focus:border-4 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
+            <p className="text-sm text-red-500 ">{errors.email?.message }</p>
           </div>
           <div className="my-4 py-2">
             <label className=" font-medium text-[#d3b87d] hover:text-[#d3b87d] ">
@@ -58,6 +76,7 @@ const LoginPage = () => {
               className="appearance-none bg-[#f7f7f7]  relative block w-full px-4 py-2 border border-[#f7f7f7]   placeholder-gray-500 text-gray-900 rounded-full focus:outline-none focus: ring-[#f4e6c3] focus:border-4 focus:border-[#f4e6c3] focus:z-10 sm:text-sm"
               placeholder="Mật Khẩu"
             />
+            <p className="text-sm text-red-500 ">{errors.password?.message }</p>
           </div>
         </div>
         <div className="flex justify-between">
