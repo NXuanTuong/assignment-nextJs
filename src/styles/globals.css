@@ -38,3 +38,10 @@
 .product_item:hover .btn_add_cart{
     @apply translate-y-0
 }
+.text-css {
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+  	-webkit-box-orient: vertical;
+    display: -webkit-box;
+    max-height: 74px;
+}

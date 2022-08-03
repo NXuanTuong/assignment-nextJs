@@ -15,9 +15,9 @@ const ProductAdmin = (props: Props) => {
   return (
     <div>
       <div className="overflow-x-auto">
-        <div className="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+        <div className="min-w-screen min-h-screen bg-gray-100 flex items-center justify-evenly bg-gray-100 font-sans overflow-hidden">
           <div className="w-full lg:w-5/6">
-            <h2 className="text-4xl font-bold text-center text-indigo-500">
+            <h2 className="text-4xl font-bold text-center text-indigo-500 mt-10">
               Bảng Sản Phẩm
             </h2>
             <Link href="/admin/products/add">
@@ -60,7 +60,7 @@ const ProductAdmin = (props: Props) => {
                       </td>
                       <td className="py-3 px-6 text-left">
                         <div className="flex items-center">
-                          <span>{item.name}</span>
+                          <span className="w-[100px]">{item.name}</span>
                         </div>
                       </td>
                       <td className="py-3 px-6 text-left">
@@ -82,7 +82,7 @@ const ProductAdmin = (props: Props) => {
                       </td>
                       <td className="py-3 px-6 text-left">
                         <div className="flex items-center">
-                          <span>{item.desc}</span>
+                          <p className="w-[150px] text-css">{item.desc}</p>
                         </div>
                       </td>
                       <td className="py-3 px-6 text-left">
@@ -93,7 +93,7 @@ const ProductAdmin = (props: Props) => {
                       <td className="py-3 px-6 text-center">
                         <span
                           className={`text-white font-bold py-1 px-3 rounded-full text-xs ${
-                            item.status == "0" ?  "bg-green-500" : "bg-red-500"
+                            item.status == "0" ? "bg-green-500" : "bg-red-500"
                           }`}
                         >
                           {item.status == "0" ? "Còn Hàng" : "Hết Hàng"}

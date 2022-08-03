@@ -1,23 +1,29 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
-const ListProduct = ({newProduct}: any) => {
+const ListProduct = ({ newProduct }: any) => {
   return (
     <div>
       <div>
         <div>
           <div>
             <div className="grid grid-cols-3 mb-5 gap-10" id="product">
-              {newProduct.length > 0 && 
+              {newProduct.length > 0 &&
                 newProduct.map((item: any, index: any) => (
                   <div
                     key={index}
                     className="px-3 py-7 shadow hover:shadow-lg product_item"
                   >
                     <div className="relative overflow-hidden">
-                      <Link href={`/product-details/${item._id}?category=${typeof item.category === "object" ? item.category._id : item.category}`}>
+                      <Link
+                        href={`/product-details/${item._id}?category=${
+                          typeof item.category === "object"
+                            ? item.category._id
+                            : item.category
+                        }`}
+                      >
                         <img
                           src={item.img}
                           className="object-cover w-full h-64 cursor-pointer"
@@ -69,11 +75,9 @@ const ListProduct = ({newProduct}: any) => {
                     </div>
                     <div>
                       <div>
-                        <Link href={`/product-details/${item._id}`}>
-                          <h3 className="text-base mb-2 font-semibold cursor-pointer text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden">
-                            {item.name}
-                          </h3>
-                        </Link>
+                        <h3 className="text-base mb-2 font-semibold cursor-pointer text-center overflow-ellipsis w-75 whitespace-nowrap overflow-hidden">
+                          {item.name}
+                        </h3>
                         <div className="flex justify-center items-center">
                           <del className="text-red-300">
                             <span>{item.price_old}đ</span>
@@ -87,26 +91,6 @@ const ListProduct = ({newProduct}: any) => {
                   </div>
                 ))}
             </div>
-          </div>
-          <div className="text-center">
-            <ul className="block">
-              <li className="inline-block px-4 py-2 border">
-                <a className="text-[#777]" href="#">
-                  <i className="fas fa-angle-left" />
-                </a>
-              </li>
-              <li className="inline-block px-4 py-2 border">
-                <button className="text-[#777]">1</button>
-              </li>
-              <li className="inline-block px-4 py-2 border">
-                <button className="text-[#777]">2</button>
-              </li>
-              <li className="inline-block px-4 py-2 border">
-                <a className="text-[#777]" href="#">
-                  <i className="fas fa-angle-right" />
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

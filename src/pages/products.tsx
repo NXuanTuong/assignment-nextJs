@@ -19,24 +19,43 @@ const Product = (props: Props) => {
   const router = useRouter();
   let q = router.query.q;
   let id = router.query.id;
-  console.log(id);
   useEffect(() => {
     const getProduct = async () => {
       const dataproduct = await (
         await fetch("http://localhost:8000/api/products")
       ).json();
+      // Check Category
       if (id) {
         const dataCate: any = await readCate(id);
         return setnewProduct(dataCate.product);
       }
+      // Check Search
       if (q) {
         const dataList: any = await searchProduct(q);
         return setnewProduct(dataList);
       }
-      if (!q) return setnewProduct(dataproduct);
+      // Paginate product
+      const getNextPage1 = async () => {
+        const data = await (
+          await fetch("http://localhost:8000/api/products?page=1")
+        ).json();
+        console.log(data);
+        setnewProduct(data);
+      };
+      getNextPage1();
+      // Check list product
+      if (!q || !id) return setnewProduct(dataproduct);
     };
     getProduct();
   }, [id, q]);
+
+  const getNextPage = async (pageNumber: number) => {
+    const data = await (
+      await fetch(`http://localhost:8000/api/products?page=${pageNumber}`)
+    ).json();
+    console.log(data);
+    setnewProduct(data);
+  };
   if (!categories) return <div>Loading...</div>;
   if (error) return <div>Falied</div>;
   return (
@@ -269,7 +288,39 @@ const Product = (props: Props) => {
           </div>
           {/* The End Grid-1 */}
           {/* Start Grid-2 */}
-          <ListProduct newProduct={newProduct} />
+          <div>
+            <ListProduct newProduct={newProduct} />
+            <div className="text-center">
+              <ul className="block">
+                <li className="inline-block px-4 py-2 border">
+                  <a className="text-[#777]" href="#">
+                    <i className="fas fa-angle-left" />
+                  </a>
+                </li>
+                <li className="inline-block px-4 py-2 border">
+                  <button
+                    className="text-[#777]"
+                    onClick={() => getNextPage(1)}
+                  >
+                    1
+                  </button>
+                </li>
+                <li className="inline-block px-4 py-2 border">
+                  <button
+                    className="text-[#777]"
+                    onClick={() => getNextPage(2)}
+                  >
+                    2
+                  </button>
+                </li>
+                <li className="inline-block px-4 py-2 border">
+                  <a className="text-[#777]" href="#">
+                    <i className="fas fa-angle-right" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
