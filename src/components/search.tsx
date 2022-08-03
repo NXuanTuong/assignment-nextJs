@@ -25,7 +25,7 @@ const Search = (props: Props) => {
           value={props.search}
           onChange={(e) => props.onchange(e.target.value)}
           id="productSeach"
-          placeholder="Men's watch..."
+          placeholder="Tìm kiếm"
           className="border-none bg-transparent w-[250px] px-2 outline-none"
         />
       </form>

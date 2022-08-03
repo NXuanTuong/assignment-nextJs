@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import useCart from "@/hooks/use-cart";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -10,6 +11,7 @@ type Props = {};
 
 const Cart = (props: Props) => {
   const router = useRouter();
+  const {data, error, increase, decrease} = useCart();
   let cart: any = [];
   if (localStorage.getItem("cart")) {
     cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -25,6 +27,12 @@ const Cart = (props: Props) => {
     }, 500);
     localStorage.setItem("cart", JSON.stringify(cartItem));
   };
+  const handleIncrease = (id: any) => {
+    increase(id);
+  }
+  const handleDecrease = (id: any) => {
+    decrease(id);
+  }
   return (
     <div>
       <div>
@@ -111,7 +119,7 @@ const Cart = (props: Props) => {
                                   {item.name}
                                 </td>
                                 <td className=" w-[120px] text-center">
-                                  <button className="btn btn-decrease  text-lg font-semibold border bg-orange-500 text-white">
+                                  <button onClick={() => handleDecrease(item._id)} className="btn btn-decrease  text-lg font-semibold border bg-orange-500 text-white">
                                     <FaAngleLeft />
                                   </button>
                                   <input
@@ -119,7 +127,7 @@ const Cart = (props: Props) => {
                                     type="text"
                                     value={`${item.quantity}`}
                                   />
-                                  <button className="btn btn-increase text-lg font-semibold border bg-green-500 text-white">
+                                  <button onClick={() => handleIncrease(item._id)} className="btn btn-increase text-lg font-semibold border bg-green-500 text-white">
                                     <FaAngleRight />
                                   </button>
                                 </td>

@@ -73,7 +73,7 @@ const HeaderWeb = (props: Props) => {
                 </div>
               </div>
               <div className={style.cart}>
-                <Link href="cart">
+                <Link href="/cart">
                   <FaShoppingCart />
                 </Link>
                 <span className="length-cart">{cart.length}</span>
