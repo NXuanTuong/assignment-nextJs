@@ -29,11 +29,9 @@ const Cart = (props: Props) => {
   };
   const handleIncrease = (id: any) => {
     increase(id);
-    toast.success("Bạn thêm sản phẩm thành công")
   }
   const handleDecrease = (id: any) => {
     decrease(id);
-    toast.success("Bạn giảm sản phẩm thành công")
   }
   return (
     <div>

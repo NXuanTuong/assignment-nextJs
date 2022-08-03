@@ -102,7 +102,7 @@ const Product = (props: Props) => {
               <ul>
                 <Search search={searchTerm} onchange={setsearchTerm} />
                 <h2 className="text-2xl border-b-[1px] mx-[-16px] px-4 py-4 font-bold text-gray-900">
-                  {/* Tìm kiếm: {q} */}
+                  Tìm kiếm: {q}
                 </h2>
               </ul>
               <div className="border p-5 bg-[#fbf9ff] shadow-md">
