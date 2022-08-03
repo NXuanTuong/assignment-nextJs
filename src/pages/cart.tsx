@@ -1,16 +1,30 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
-import { FaAngleRight, FaTrash } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 type Props = {};
 
 const Cart = (props: Props) => {
+  const router = useRouter();
   let cart: any = [];
   if (localStorage.getItem("cart")) {
     cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    console.log(cart);
   }
+
+  const handleDeleteCart = (id: any) => {
+    let cartItem = JSON.parse(localStorage.getItem("cart") || "[]");
+    cartItem = cartItem.filter((item: any) => item._id !== id);
+    toast.success("Xóa sản phẩm thành công");
+    setTimeout(() => {
+      router.replace("/cart");
+    }, 500);
+    localStorage.setItem("cart", JSON.stringify(cartItem));
+  };
   return (
     <div>
       <div>
@@ -30,12 +44,12 @@ const Cart = (props: Props) => {
               </span>
             </li>
             <li className="inline-block">
-              <a
+              <Link
                 className="px-1 text-lg font-medium text-black py-3"
                 href="/cart"
               >
                 Shopping Cart
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -97,15 +111,15 @@ const Cart = (props: Props) => {
                                   {item.name}
                                 </td>
                                 <td className=" w-[120px] text-center">
-                                  <button className="btn btn-decrease font-semibold border bg-orange-500 text-white">
-                                    <i className="bi bi-dash-lg" />
+                                  <button className="btn btn-decrease  text-lg font-semibold border bg-orange-500 text-white">
+                                    <FaAngleLeft />
                                   </button>
                                   <input
                                     className="w-16 text-center px-5 border boder-gray-500 outline-none"
                                     type="text"
                                     value={`${item.quantity}`}
                                   />
-                                  <button className="btn btn-increase text-xl font-semibold border bg-green-500 text-white">
+                                  <button className="btn btn-increase text-lg font-semibold border bg-green-500 text-white">
                                     <FaAngleRight />
                                   </button>
                                 </td>
@@ -117,7 +131,7 @@ const Cart = (props: Props) => {
                                 </td>
                                 <td className="text-center">
                                   <button
-                                    data-id="${item.id}"
+                                    onClick={() => handleDeleteCart(item._id)}
                                     className="btn btn-remove"
                                   >
                                     <FaTrash />
