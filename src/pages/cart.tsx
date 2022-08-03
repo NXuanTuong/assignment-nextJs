@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React from "react";
-import { FaAngleRight } from "react-icons/fa";
+import { FaAngleRight, FaTrash } from "react-icons/fa";
 
 type Props = {};
 
@@ -79,6 +79,7 @@ const Cart = (props: Props) => {
                             <th>Số lượng</th>
                             <th>Giá sản phẩm</th>
                             <th>Tổng tiền</th>
+                            <th>Hoạt động</th>
                             <th />
                           </tr>
                         </thead>
@@ -89,13 +90,13 @@ const Cart = (props: Props) => {
                                 <td>
                                   <img
                                     src={`${item.img}`}
-                                    className="w-full object-cover max-w-full h-40"
+                                    className="w-[150px] object-cover max-w-full h-40"
                                   />
                                 </td>
-                                <td className="text-sm w-52 text-center">
+                                <td className="text-sm w-[150px] text-center">
                                   {item.name}
                                 </td>
-                                <td>
+                                <td className=" w-[120px] text-center">
                                   <button className="btn btn-decrease font-semibold border bg-orange-500 text-white">
                                     <i className="bi bi-dash-lg" />
                                   </button>
@@ -108,16 +109,18 @@ const Cart = (props: Props) => {
                                     <FaAngleRight />
                                   </button>
                                 </td>
-                                <td className="text-center">
+                                <td className="text-center w-[120px]">
                                   {item.price_new}đ
                                 </td>
-                                <td className="text-center">{item.total}đ</td>
-                                <td>
+                                <td className="text-center  w-[120px]">
+                                  {item.total}đ
+                                </td>
+                                <td className="text-center">
                                   <button
                                     data-id="${item.id}"
                                     className="btn btn-remove"
                                   >
-                                    <i className="bi bi-trash-fill" />
+                                    <FaTrash />
                                   </button>
                                 </td>
                               </tr>
