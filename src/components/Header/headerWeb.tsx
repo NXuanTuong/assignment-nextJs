@@ -6,6 +6,7 @@ import style from "./Home.module.css";
 type Props = {};
 
 const HeaderWeb = (props: Props) => {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   return (
     <div>
       <div className={style.mainHeader}>
@@ -18,9 +19,7 @@ const HeaderWeb = (props: Props) => {
                 itemType="http://schema.org/Organization"
               >
                 <h1>
-                  <a itemProp="url">
-                    SkyBook
-                  </a>
+                  <a itemProp="url">SkyBook</a>
                 </h1>
               </div>
             </div>
@@ -77,7 +76,7 @@ const HeaderWeb = (props: Props) => {
                 <Link href="cart">
                   <FaShoppingCart />
                 </Link>
-                <span className="length-cart">0</span>
+                <span className="length-cart">{cart.length}</span>
               </div>
             </div>
           </div>
