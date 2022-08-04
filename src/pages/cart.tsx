@@ -12,26 +12,54 @@ type Props = {};
 const Cart = (props: Props) => {
   const router = useRouter();
   const {data, error, increase, decrease} = useCart();
-  let cart: any = [];
-  if (localStorage.getItem("cart")) {
-    cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    console.log(cart);
-  }
+  let total_price = 0;
+  const cart: any = JSON.parse(localStorage.getItem("cart") || "[]");
+   console.log(cart);
+   cart.forEach((element:any) => {
+    console.log(element.total);
+    total_price += element.total
+   });
+   
+  
 
   const handleDeleteCart = (id: any) => {
-    let cartItem = JSON.parse(localStorage.getItem("cart") || "[]");
-    cartItem = cartItem.filter((item: any) => item._id !== id);
+    const confirm = window.confirm("Bạn có muốn xóa không!")
+    if(confirm){
+      let cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+    cartItems = cartItems.filter((item: any) => item._id !== id);
     toast.success("Xóa sản phẩm thành công");
     setTimeout(() => {
       router.replace("/cart");
     }, 500);
-    localStorage.setItem("cart", JSON.stringify(cartItem));
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
+    
   };
   const handleIncrease = (id: any) => {
-    increase(id);
+    const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartItem = cartItems.find((item:any) => item._id === id);
+    cartItem.quantity++
+    cartItem.total += cartItem.price_new
+    localStorage.setItem('cart', JSON.stringify(cartItems))
+    router.replace('/cart')
   }
   const handleDecrease = (id: any) => {
-    decrease(id);
+    const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartItem = cartItems.find((item:any) => item._id === id);
+    if(cartItem.quantity <= 1){
+      const confirm = window.confirm("Bạn có muốn xóa không!");
+      if(confirm){
+        localStorage.setItem('cart', JSON.stringify(cartItems.filter((item: any) => item._id !== id)));
+        toast.success("Xóa sản phẩm thành công");
+        return router.replace("/cart")
+      }
+    }else{
+      cartItem.quantity--
+      cartItem.total -= cartItem.price_new
+      localStorage.setItem('cart', JSON.stringify(cartItems))
+      router.replace('/cart')
+    }
+    
   }
   return (
     <div>
@@ -213,7 +241,7 @@ const Cart = (props: Props) => {
                           id="total_cart"
                           className="text-lg font-semibold text-red-500"
                         >
-                          null
+                          {total_price}
                         </p>
                       </div>
                     </div>
