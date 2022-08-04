@@ -1,6 +1,10 @@
+import { isAuthenticate } from '@/../utils/localStorage'
+import { useRouter } from 'next/router'
 import React from 'react'
+import { toast } from 'react-toastify'
 import AdminHeader from '../Header/admin'
 import SideBar from '../Header/sidebar'
+import withAuth from '../privateRouter'
 
 type LayoutProps = {
     children: React.ReactNode
@@ -22,4 +26,4 @@ const AdminLayout = ({children}: LayoutProps) => {
   )
 }
 
-export default AdminLayout
+export default withAuth(AdminLayout)
