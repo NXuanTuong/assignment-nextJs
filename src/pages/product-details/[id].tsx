@@ -46,7 +46,11 @@ const ProductDetails = (props: Props) => {
     }
     toast.success("Bạn thêm vào giỏ hàng thành công!")
     console.log(cart);
+    
     localStorage.setItem("cart", JSON.stringify(cart));
+    // setTimeout(() => {
+    //   router.replace(`/product-details/${product._id}?category=${product.category}`)
+    // },500)
   };
   return (
     <div>
