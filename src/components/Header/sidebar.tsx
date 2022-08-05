@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
+import withAuth from "../privateRouter";
 
 type Props = {};
 
@@ -125,4 +126,4 @@ const SideBar = (props: Props) => {
   );
 };
 
-export default SideBar;
+export default withAuth(SideBar) ;

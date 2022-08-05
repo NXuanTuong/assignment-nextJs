@@ -1,4 +1,5 @@
 import AdminLayout from '@/components/Layout/admin'
+import withAuth from '@/components/privateRouter'
 import React from 'react'
 
 type Props = {}
@@ -12,6 +13,6 @@ const Admin = (props: Props) => {
     </div>
   )
 }
-Admin.Layout = AdminLayout;
+ Admin.Layout = withAuth(AdminLayout) ;
 
 export default Admin

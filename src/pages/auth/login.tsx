@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup"
+import { isAuthenticate } from "@/../utils/localStorage";
 
 const schema = yup.object().shape({
   email: yup
@@ -26,6 +27,7 @@ type FormInput={
 }
 const LoginPage = () => {
   const router = useRouter()
+  const {user} = isAuthenticate()
     const dispatch = useDispatch<AppDispatch>()
     const {register, handleSubmit, formState:{errors}} = useForm<FormInput>({
       resolver: yupResolver(schema)
@@ -41,6 +43,10 @@ const LoginPage = () => {
         toast.error(error.response.data.message)
       }
     } 
+    if(user){
+      toast.warning('Bạn đã đăng nhập')
+       router.replace('/')
+    }
   return (
     <div className="w-[400px] mx-auto shadow-xl rounded-lg bg-white p-8 mt-5 mb-8">
       <h1 className="text-center font-medium text-3xl">Đăng Nhập</h1>
