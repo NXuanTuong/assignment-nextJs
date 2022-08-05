@@ -99,6 +99,7 @@
 }
 .cart {
     position: relative;
+    cursor: pointer;
 }
 
 .cart span {
