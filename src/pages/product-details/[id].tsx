@@ -29,28 +29,29 @@ const ProductDetails = (props: Props) => {
     cart = JSON.parse(localStorage.getItem("cart") as string);
   }
   const addToCart = (product: any) => {
-    
     const existProduct = cart.find((item) => {
       return item._id == product._id;
     });
     const newItem = {
       ...product,
-      quantity: value? +value: 1 ,
-      total: value?  parseInt(value) *product.price_new : 1
+      quantity: value ? +value : 1,
+      total: value ? parseInt(value) * product.price_new : 1,
     };
     if (!existProduct) {
       cart.push(newItem);
     } else {
       existProduct.quantity += newItem.quantity;
-      existProduct.total += (existProduct.price_new*value) ;
+      existProduct.total += existProduct.price_new * value;
     }
-    toast.success("Bạn thêm vào giỏ hàng thành công!")
+    toast.success("Bạn thêm vào giỏ hàng thành công!");
     console.log(cart);
-    
+
     localStorage.setItem("cart", JSON.stringify(cart));
-    // setTimeout(() => {
-    //   router.replace(`/product-details/${product._id}?category=${product.category}`)
-    // },500)
+    setTimeout(() => {
+      router.replace(
+        `/product-details/${product._id}?category=${product.category}`
+      );
+    }, 500);
   };
   return (
     <div>
