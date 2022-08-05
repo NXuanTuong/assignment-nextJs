@@ -9,25 +9,42 @@ type Props = {};
 
 const DropDownUser = (props: Props) => {
   const router = useRouter();
+  const user = JSON.parse(localStorage.getItem("user") as string);
+  console.log(user);
+
   const logOut = () => {
-    localStorage.removeItem('user');
-    toast.success("Bạn đăng xuất thành công!")
+    localStorage.removeItem("user");
+    toast.success("Bạn đăng xuất thành công!");
     setTimeout(() => {
-      router.replace('/auth/login')
-    },1000)
-  }
+      router.replace("/auth/login");
+    }, 1000);
+  };
   return (
     <div>
       <div className={style.dropdown}>
         <button className={style.dropbtn}>
-            <FaUserAlt/>
+          <FaUserAlt />
         </button>
-        <div className={style['dropdown-content']}>
-          <Link href="/user/detail">Thông tin</Link>
-          <Link href="/user/edit">Cập nhật</Link>
-          <p onClick={() => logOut()}> <Link href="">Đăng xuất</Link></p>
-          
-        </div>
+        {user && user.user.role === 1 ? (
+          <div className={style["dropdown-content"]}>
+            <Link href="/user/detail">Thông tin</Link>
+            <Link href="/user/edit">Cập nhật</Link>
+            <Link href="/admin">Admin</Link>
+            <p onClick={() => logOut()}>
+              {" "}
+              <Link href="">Đăng xuất</Link>
+            </p>
+          </div>
+        ) : (
+          <div className={style["dropdown-content"]}>
+            <Link href="/user/detail">Thông tin</Link>
+            <Link href="/user/edit">Cập nhật</Link>
+            <p onClick={() => logOut()}>
+              {" "}
+              <Link href="">Đăng xuất</Link>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

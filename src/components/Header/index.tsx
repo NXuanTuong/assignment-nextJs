@@ -2,10 +2,9 @@ import { FaShoppingCart, FaUserAlt } from "react-icons/fa";
 import Link from "next/link";
 import React from "react";
 import style from "./Home.module.css";
-import HeaderWeb from "./headerWeb";
 import useUser from "@/hooks/use-users";
 import DropDownUser from "./dropDownUser";
-import Cart from "@/pages/cart/cart";
+import Cart from "@/pages/cart";
 
 type Props = {};
 
@@ -15,9 +14,7 @@ const Header = (props: Props) => {
   const { readUser } = useUser();
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  if (!user) {
-    return <HeaderWeb />;
-  }
+ 
   return (
     <div>
       <div className={style.mainHeader}>
@@ -69,13 +66,34 @@ const Header = (props: Props) => {
               </nav>
             </div>
             <div className={style.headerwrapaction}>
-              <div className="form">
-                <div className={style.cssform}>
-                  <DropDownUser />
-                  <p className="mr-[50px] ml-[10px]">
-                    Hello, <span className="font-bold">{user.user.email}</span>{" "}
-                  </p>
-                </div>
+            <div className="form">
+                {user && (
+                  <>
+                    <div className={style.cssform}>
+                      <DropDownUser />
+                      <p className="mr-[50px] ml-[10px]">
+                        Hello,{" "}
+                        <span className="font-bold">{user.user.email}</span>{" "}
+                      </p>
+                    </div>
+                  </>
+                )}
+                {!user && (
+                  <>
+                    <div className={style.cssform}>
+                      <FaUserAlt />
+                      <ul>
+                        <li>
+                          <Link href="/auth/login">Đăng nhập</Link>
+                        </li>
+                        |
+                        <li>
+                          <Link href="/auth/register">Đăng ký</Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </>
+                )}
               </div>
               <div className={style.cart}>
                 <Link href="/cart">

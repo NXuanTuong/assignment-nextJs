@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { toast } from 'react-toastify'
 import AdminHeader from '../Header/admin'
-import SideBar from '../Header/sidebar'
+import SideBar from '../Header/sidebarAdmin'
 
 type LayoutProps = {
     children: React.ReactNode
